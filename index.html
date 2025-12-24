@@ -1,65 +1,21 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <!-- BASIC META -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Hasya' Scraft & Hijab - Tampil Anggun Setiap Hari</title>
 
   <!-- SEO META -->
-  <title>Hasya' Scraft & Hijab | Hijab & Scraft Elegan Kekinian</title>
-  <meta name="description" content="Hasya' Scraft & Hijab menyediakan hijab dan scraft elegan, nyaman, dan kekinian untuk menunjang penampilan anggun setiap hari." />
-  <meta name="keywords" content="hijab kekinian, scraft hijab, hijab elegan, hijab wanita muslimah, hasya scraft hijab" />
+  <meta name="description" content="Hasya' Scraft & Hijab menyediakan hijab dan scraft elegan, nyaman, dan kekinian untuk wanita muslimah." />
+  <meta name="keywords" content="hijab, scraft, hijab kekinian, hijab elegan, hasya scraft" />
   <meta name="author" content="Hasya' Scraft & Hijab" />
-  <meta name="robots" content="index, follow" />
 
-  <!-- CANONICAL -->
-  <link rel="canonical" href="https://username.github.io/hasya-scraft-hijab/" />
-
-  <!-- OPEN GRAPH (FACEBOOK, WHATSAPP, GOOGLE) -->
-  <meta property="og:title" content="Hasya' Scraft & Hijab - Tampil Anggun Setiap Hari" />
-  <meta property="og:description" content="Hijab dan scraft berkualitas tinggi dengan desain modern untuk wanita muslimah." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://username.github.io/hasya-scraft-hijab/" />
-  <meta property="og:image" content="https://username.github.io/hasya-scraft-hijab/logo.jpg" />
-
-  <!-- TWITTER CARD -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hasya' Scraft & Hijab" />
-  <meta name="twitter:description" content="Hijab & scraft elegan untuk penampilan anggun setiap hari." />
-  <meta name="twitter:image" content="https://username.github.io/hasya-scraft-hijab/logo.jpg" />
-
-  <!-- GOOGLE FONT -->
+  <!-- GOOGLE FONT (LEBIH BENAR DARI @IMPORT) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- SCHEMA JSON-LD (ORGANIZATION + LOCAL BUSINESS) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Hasya' Scraft & Hijab",
-    "image": "https://username.github.io/hasya-scraft-hijab/logo.jpg",
-    "url": "https://username.github.io/hasya-scraft-hijab/",
-    "telephone": "+62-812-3456-7890",
-    "priceRange": "Rp50.000 - Rp250.000",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Jl. Contoh No. 10",
-      "addressLocality": "Jakarta",
-      "addressRegion": "DKI Jakarta",
-      "postalCode": "12345",
-      "addressCountry": "ID"
-    },
-    "sameAs": [
-      "https://instagram.com/hasyascraft",
-      "https://facebook.com/hasyascraft"
-    ]
-  }
-  </script>
-
-  <!-- STYLE (CSS MILIKMU) -->
   <style>
     :root {
       --pink: #ffc0cb;
@@ -75,9 +31,27 @@
       scroll-behavior: smooth;
     }
 
-    /* (CSS kamu tetap lanjut di sini tanpa diubah) */
-  </style>
+    header {
+      background-color: var(--pink);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+    }
 
+    .hero {
+      background: url('background-1.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 160px 20px;
+      position: relative;
+    }
+  </style>
 </head>
 
 <body>
@@ -110,7 +84,7 @@
   <section id="about">
     <h2>Tentang Produk</h2>
     <div class="about">
-      <img src="logo-hijab-1.jpg" alt="Logo Hasya Hijab">
+      <img src="logo hijab-1.jpg" alt="Logo Hasya Hijab">
       <div class="about-text">
         <p>Hasya' Scraft & Hijab adalah merek hijab modern yang memadukan kualitas premium dengan desain elegan. Dibuat dari bahan yang lembut dan ringan, hijab ini memberikan kenyamanan maksimal tanpa mengurangi gaya Anda.</p>
       </div>
@@ -150,7 +124,7 @@
       <div class="product-card"><img src="hijab bella square.jpg"><div class="product-info"><h3>Hijab Bella Square</h3><p class="price">Rp30.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
       <div class="product-card"><img src="hijab bergo.jpg"><div class="product-info"><h3>Hijab Bergo Sport</h3><p class="price">Rp15.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
       <div class="product-card"><img src="pashmina crinkle.jpg"><div class="product-info"><h3>Pashmina Crinkle</h3><p class="price">Rp35.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
-      <div class="product-card"><img src="pashmina ombre 2 warna.jpg"><div class="product-info"><h3>Pashmina Ombre 2 Warna</h3><p class="price">Rp45.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
+      <div class="product-card"><img src="pashmina-ombre-2-warna.jpg"><div class="product-info"><h3>Pashmina Ombre 2 Warna</h3><p class="price">Rp45.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
       <div class="product-card"><img src="hijab paris jadul.jpg"><div class="product-info"><h3>Hijab Paris Jadul</h3><p class="price">Rp15.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
      </div>
   </section>
@@ -206,5 +180,3 @@
   </script>
 </body>
 </html>
-
-
