@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Hasya' Scraft & Hijab - Tampil Anggun Setiap Hari</title>
 
   <!-- SEO META -->
-  <meta name="description" content="Hasya' Scraft & Hijab menyediakan hijab dan scraft elegan, nyaman, dan kekinian untuk wanita muslimah." />
-  <meta name="keywords" content="hijab, scraft, hijab kekinian, hijab elegan, hasya scraft" />
-  <meta name="author" content="Hasya' Scraft & Hijab" />
+  <meta name="description" content="Hasya' Scraft & Hijab menyediakan hijab dan scraft elegan, nyaman, dan kekinian untuk wanita muslimah.">
+  <meta name="keywords" content="hijab, scraft, hijab kekinian, hijab elegan, hasya scraft">
+  <meta name="author" content="Hasya' Scraft & Hijab">
 
-  <!-- GOOGLE FONT (LEBIH BENAR DARI @IMPORT) -->
+  <!-- GOOGLE FONT -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -23,14 +23,18 @@
       --light: #fffafc;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #fff;
       color: #333;
       scroll-behavior: smooth;
     }
 
+    /* HEADER */
     header {
       background-color: var(--pink);
       padding: 15px 40px;
@@ -44,140 +48,290 @@
       flex-wrap: wrap;
     }
 
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--dark-pink);
+    }
+
+    /* HERO */
     .hero {
       background: url('background-1.jpg') center/cover no-repeat;
       color: white;
       text-align: center;
       padding: 160px 20px;
-      position: relative;
+    }
+
+    .btn {
+      background: var(--dark-pink);
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 30px;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    /* SECTION */
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* ABOUT */
+    .about {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .about img {
+      width: 250px;
+      border-radius: 12px;
+    }
+
+    /* BENEFITS */
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .benefit {
+      background: var(--light);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    /* TESTIMONI */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .testimonial {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .testimonial img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    /* PRODUK */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      background: #fff;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 15px;
+    }
+
+    .price {
+      color: var(--dark-pink);
+      font-weight: bold;
+    }
+
+    button {
+      background: var(--dark-pink);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    /* FORM */
+    form {
+      max-width: 400px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+    }
+
+    /* POPUP */
+    .popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f2f2f2;
+      margin-top: 40px;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Hasya' Scraft & Hijab</h1>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">Tentang</a></li>
-        <li><a href="#benefit">Manfaat</a></li>
-        <li><a href="#testimoni">Testimoni</a></li>
-        <li><a href="#produk">Produk</a></li>
-        <li><a href="#order">Beli Sekarang</a></li>
-        <li><a href="#contact">Kontak</a></li>
-      </ul>
-    </nav>
-  </header>
+<header>
+  <h1>Hasya' Scraft & Hijab</h1>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#benefit">Manfaat</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
+      <li><a href="#produk">Produk</a></li>
+      <li><a href="#order">Beli Sekarang</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h2>Tampil Anggun Setiap Hari</h2>
-      <p>Dengan Hasya' Scraft & Hijab – hijab elegan, lembut, dan nyaman dikenakan.</p>
-      <a href="#order" class="btn">Beli Sekarang</a>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <h2>Tentang Produk</h2>
-    <div class="about">
-      <img src="logo-hijab-1.jpg" alt="Logo Hasya Hijab">
-      <div class="about-text">
-        <p>Hasya' Scraft & Hijab adalah merek hijab modern yang memadukan kualitas premium dengan desain elegan. Dibuat dari bahan yang lembut dan ringan, hijab ini memberikan kenyamanan maksimal tanpa mengurangi gaya Anda.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- BENEFITS -->
-  <section id="benefit">
-    <h2>Manfaat & Keunggulan</h2>
-    <div class="benefits">
-      <div class="benefit"><i>💧</i><h4>Nyaman Dipakai</h4><p>Bahan ringan dan lembut, cocok untuk aktivitas harian.</p></div>
-      <div class="benefit"><i>🌸</i><h4>Warna Elegan</h4><p>Palet warna yang anggun untuk semua suasana.</p></div>
-      <div class="benefit"><i>🧵</i><h4>Kualitas Premium</h4><p>Jahitan rapi dan bahan tidak mudah kusut.</p></div>
-      <div class="benefit"><i>💖</i><h4>Desain Stylish</h4><p>Mudah dipadu padankan dengan gaya busana apa pun.</p></div>
-    </div>
-  </section>
-
-  <!-- TESTIMONI -->
-  <section id="testimoni">
-    <h2>Testimoni Pelanggan</h2>
-    <div class="testimonials">
-      <div class="testimonial"><img src="gambar-1.jpg"><p>"Bahannya adem banget, mudah di atur dan jahitannya juga rapih!"</p><strong> Aisyah</strong></div>
-      <div class="testimonial"><img src="gambar-2.jpg"><p>"Hijab elegan untuk segala acara. Sudah beli 3 kali!"</p><strong> Nabila</strong></div>
-      <div class="testimonial"><img src="gambar-3.jpg"><p>"Bahan hijabnya bagus, saya beli yang motif dan gambar motifnya juga elegan!"</p><strong> Hana</strong></div>
-      <div class="testimonial"><img src="gambar-4.jpg"><p>"Hijab ini sangat mudah dibentuk dan tidak gampang lecek. Cocok buat daily maupun kondangan!"</p><strong> Amel</strong></div>
-      <div class="testimonial"><img src="gambar-5.jpg"><p>"Kualitas barangnya bagus bangettt, harganya juga masih terjangkau!"</p><strong> Dilla</strong></div>
-    </div>
-  </section>
-
-  <!-- PRODUK -->
-  <section id="produk">
-    <h2>Koleksi Produk</h2>
-    <div class="product-grid">
-      <div class="product-card"><img src="pashmina-kaos.jpg"><div class="product-info"><h3>Hijab Pashmina Kaos Rayon</h3><p class="price">Rp45.000</p><button onclick="beli('Hijab Paris Soft Pink')">Beli Sekarang</button></div></div>
-      <div class="product-card"><img src="pashmina-ceruty.jpg"><div class="product-info"><h3>Hijab Pashmina Ceruty</h3><p class="price">Rp45.000</p><button onclick="beli('Hijab Satin Elegance')">Beli Sekarang</button></div></div>
-      <div class="product-card"><img src="hijab-motif.jpg"><div class="product-info"><h3>Hijab Square Scraf</h3><p class="price">Rp40.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
-      <div class="product-card"><img src="hijab-bella-square.jpg"><div class="product-info"><h3>Hijab Bella Square</h3><p class="price">Rp30.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
-      <div class="product-card"><img src="hijab-bergo.jpg"><div class="product-info"><h3>Hijab Bergo Sport</h3><p class="price">Rp15.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
-      <div class="product-card"><img src="pashmina-crinkle.jpg"><div class="product-info"><h3>Pashmina Crinkle</h3><p class="price">Rp35.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
-      <div class="product-card"><img src="pashmina-ombre-2-warna.jpg"><div class="product-info"><h3>Pashmina Ombre 2 Warna</h3><p class="price">Rp45.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
-      <div class="product-card"><img src="hijab-paris-jadul.jpg"><div class="product-info"><h3>Hijab Paris Jadul</h3><p class="price">Rp15.000</p><button onclick="beli('Hijab Voal Premium')">Beli Sekarang</button></div></div>
-     </div>
-  </section>
-
-  <!-- FORM -->
-  <section id="order">
-    <h2>Form Pemesanan</h2>
-    <form onsubmit="return kirimPesanan(event)">
-      <input type="text" id="nama" placeholder="Nama Lengkap" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <textarea id="alamat" placeholder="Alamat Pengiriman" required></textarea>
-      <input type="number" id="jumlah" placeholder="Jumlah Pesanan" required min="1">
-      <button type="submit">Kirim Pesanan</button>
-    </form>
-  </section>
-
-  <!-- KONTAK -->
-<section id="contact">
-  <h2>Kontak & Sosial Media</h2>
-  <p style="text-align:center;">📍 Jl. Melati No. 15, Bandung</p>
-  <p style="text-align:center;">📞 +62 812-3456-7890 | ✉️ hasyashijab@gmail.com</p>
-  <p style="text-align:center;">Ikuti kami:
-    <a href="https://www.instagram.com/_sya.hsya" target="_blank">Instagram</a> | 
-    <a href="https://www.tiktok.com/@akuasyaa3" target="_blank">TikTok</a> | 
-    <a href="https://shopee.co.id/hsyaarhm1003" target="_blank">Shopee</a>
-  </p>
+<section class="hero" id="home">
+  <h2>Tampil Anggun Setiap Hari</h2>
+  <p>Dengan Hasya' Scraft & Hijab – hijab elegan, lembut, dan nyaman dikenakan.</p>
+  <a href="#order" class="btn">Beli Sekarang</a>
 </section>
 
-
-  <div class="popup" id="popup">
-    <div class="popup-content">
-      <h3>✅ Pesanan Anda Berhasil Dikirim!</h3>
-      <button onclick="tutupPopup()">Tutup</button>
-    </div>
+<section id="about">
+  <h2>Tentang Produk</h2>
+  <div class="about">
+    <img src="logo-hijab-1.jpg" alt="Logo Hasya Hijab">
+    <p>Hasya' Scraft & Hijab adalah merek hijab modern dengan kualitas premium dan desain elegan.</p>
   </div>
+</section>
 
-  <footer>© 2025 Hasya' Scraft & Hijab | <a href="#">Kebijakan Privasi</a></footer>
+<section id="benefit">
+  <h2>Manfaat & Keunggulan</h2>
+  <div class="benefits">
+    <div class="benefit">💧 Nyaman Dipakai</div>
+    <div class="benefit">🌸 Warna Elegan</div>
+    <div class="benefit">🧵 Kualitas Premium</div>
+    <div class="benefit">💖 Desain Stylish</div>
+  </div>
+</section>
 
-  <script>
-    function beli(namaProduk){
-      const pesan = `Halo admin, saya ingin membeli *${namaProduk}*. Apakah masih tersedia?`;
-      const url = `https://wa.me/6281234567890?text=${encodeURIComponent(pesan)}`;
-      window.open(url, '_blank');
-    }
-    function kirimPesanan(event){
-      event.preventDefault();
-      document.getElementById('popup').style.display = 'flex';
-      return false;
-    }
-    function tutupPopup(){
-      document.getElementById('popup').style.display = 'none';
-    }
-  </script>
+<section id="testimoni">
+  <h2>Testimoni Pelanggan</h2>
+  <div class="testimonials">
+    <div class="testimonial"><img src="gambar-1.jpg" alt=""><p>"Bahannya adem!"</p><strong>Aisyah</strong></div>
+    <div class="testimonial"><img src="gambar-2.jpg" alt=""><p>"Hijab elegan."</p><strong>Nabila</strong></div>
+    <div class="testimonial"><img src="gambar-3.jpg" alt=""><p>"Motifnya cantik."</p><strong>Hana</strong></div>
+    <div class="testimonial"><img src="gambar-4.jpg" alt=""><p>"Tidak mudah kusut."</p><strong>Amel</strong></div>
+    <div class="testimonial"><img src="gambar-5.jpg" alt=""><p>"Harga terjangkau."</p><strong>Dilla</strong></div>
+  </div>
+</section>
+
+<section id="produk">
+  <h2>Koleksi Produk</h2>
+  <div class="product-grid">
+    <div class="product-card"><img src="pashmina-kaos.jpg" alt=""><div class="product-info"><h3>Pashmina Kaos Rayon</h3><p class="price">Rp45.000</p><button onclick="beli('Pashmina Kaos Rayon')">Beli Sekarang</button></div></div>
+    <div class="product-card"><img src="pashmina-ceruty.jpg" alt=""><div class="product-info"><h3>Pashmina Ceruty</h3><p class="price">Rp45.000</p><button onclick="beli('Pashmina Ceruty')">Beli Sekarang</button></div></div>
+    <div class="product-card"><img src="hijab-motif.jpg" alt=""><div class="product-info"><h3>Hijab Square Scarf</h3><p class="price">Rp40.000</p><button onclick="beli('Hijab Square Scarf')">Beli Sekarang</button></div></div>
+  </div>
+</section>
+
+<section id="order">
+  <h2>Form Pemesanan</h2>
+  <form onsubmit="return kirimPesanan(event)">
+    <input type="text" placeholder="Nama Lengkap" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Alamat Pengiriman" required></textarea>
+    <input type="number" placeholder="Jumlah Pesanan" min="1" required>
+    <button type="submit">Kirim Pesanan</button>
+  </form>
+</section>
+
+<section id="contact">
+  <h2>Kontak</h2>
+  <p style="text-align:center;">📞 +62 812-3456-7890</p>
+</section>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h3>✅ Pesanan Berhasil Dikirim!</h3>
+    <button onclick="tutupPopup()">Tutup</button>
+  </div>
+</div>
+
+<footer>
+  © 2025 Hasya' Scraft & Hijab
+</footer>
+
+<script>
+  function beli(namaProduk) {
+    const pesan = `Halo admin, saya ingin membeli ${namaProduk}`;
+    window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(pesan)}`, '_blank');
+  }
+
+  function kirimPesanan(event) {
+    event.preventDefault();
+    document.getElementById('popup').style.display = 'flex';
+    return false;
+  }
+
+  function tutupPopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+</script>
+
 </body>
 </html>
-
