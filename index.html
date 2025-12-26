@@ -102,6 +102,12 @@ border-radius:20px;
 cursor:pointer;
 }
 
+select{
+padding:6px;
+margin-bottom:8px;
+width:100%;
+}
+
 .cart-box{
 background:var(--light);
 padding:20px;
@@ -112,19 +118,13 @@ box-shadow:0 4px 10px rgba(0,0,0,0.1);
 .cart-item{
 display:grid;
 grid-template-columns:2fr 1fr 1fr 1fr;
-align-items:center;
 gap:10px;
 margin-bottom:10px;
+align-items:center;
 }
 
 .qty button{
 padding:3px 8px;
-}
-
-select{
-padding:8px;
-width:100%;
-margin-top:10px;
 }
 
 footer{
@@ -161,7 +161,6 @@ padding:15px;
 <h2>Koleksi Produk</h2>
 <div class="product-grid">
 
-<!-- 8 PRODUK (TIDAK ADA YANG DIHAPUS) -->
 <script>
 const produk=[
 ["Pashmina Kaos Rayon",45000,"pashmina kaos.jpg"],
@@ -174,21 +173,32 @@ const produk=[
 ["Hijab Paris Jadul",15000,"hijab paris jadul.jpg"]
 ];
 
-document.write(produk.map(p=>`
+const warna=["Hitam","Putih","Cream","Nude","Milo","Dusty Pink","Abu"];
+
+document.write(produk.map((p,i)=>`
 <div class="product-card">
 <img src="${p[2]}">
 <div class="product-info">
 <h3>${p[0]}</h3>
 <p class="price">Rp${p[1]}</p>
-<button onclick="tambahKeranjang('${p[0]}',${p[1]})">Beli Sekarang</button>
+
+<select id="warna${i}">
+${warna.map(w=>`<option value="${w}">${w}</option>`).join("")}
+</select>
+
+<button onclick="tambahKeranjang('${p[0]}',${p[1]},document.getElementById('warna${i}').value)">
+Beli Sekarang
+</button>
+
 </div>
-</div>`).join(""));
+</div>
+`).join(""));
 </script>
 
 </div>
 </section>
 
-<!-- KERANJANG SHOPEE STYLE -->
+<!-- KERANJANG -->
 <section id="keranjang">
 <h2>Keranjang Belanja</h2>
 
@@ -200,7 +210,7 @@ document.write(produk.map(p=>`
 <select id="pembayaran">
 <option value="Transfer Bank">Transfer Bank</option>
 <option value="E-Wallet (Dana/OVO/Gopay)">E-Wallet</option>
-<option value="COD">COD (Bayar di Tempat)</option>
+<option value="COD">COD</option>
 </select>
 
 <br><br>
@@ -212,12 +222,12 @@ document.write(produk.map(p=>`
 <script>
 let keranjang=[];
 
-function tambahKeranjang(nama,harga){
-let item=keranjang.find(i=>i.nama===nama);
+function tambahKeranjang(nama,harga,warna){
+let item=keranjang.find(i=>i.nama===nama && i.warna===warna);
 if(item){
 item.qty++;
 }else{
-keranjang.push({nama,harga,qty:1});
+keranjang.push({nama,harga,warna,qty:1});
 }
 renderCart();
 }
@@ -232,7 +242,7 @@ let subtotal=item.harga*item.qty;
 total+=subtotal;
 cart.innerHTML+=`
 <div class="cart-item">
-<span>${item.nama}</span>
+<span>${item.nama}<br><small>Warna: ${item.warna}</small></span>
 <div class="qty">
 <button onclick="ubahQty(${i},-1)">-</button>
 ${item.qty}
@@ -263,11 +273,11 @@ let pesan="Halo admin, saya ingin memesan:%0A";
 let total=0;
 
 keranjang.forEach(i=>{
-pesan+=`- ${i.nama} x${i.qty} (Rp ${i.harga*i.qty})%0A`;
+pesan+=`- ${i.nama} (${i.warna}) x${i.qty} = Rp ${i.harga*i.qty}%0A`;
 total+=i.harga*i.qty;
 });
 
-pesan+=`%0ATotal: Rp ${total}%0AMetode: ${metode}`;
+pesan+=`%0ATotal: Rp ${total}%0AMetode Pembayaran: ${metode}`;
 window.open(`https://wa.me/6281316038114?text=${pesan}`,'_blank');
 }
 </script>
