@@ -124,9 +124,7 @@ margin-bottom:10px;
 align-items:center;
 }
 
-.qty button{
-padding:3px 8px;
-}
+.qty button{padding:3px 8px;}
 
 .success-box{
 background:#e8fff1;
@@ -151,9 +149,7 @@ border-bottom:1px solid #ddd;
 padding:10px 0;
 }
 
-.star{
-color:gold;
-}
+.star{color:gold;}
 
 footer{
 background:var(--pink);
@@ -209,11 +205,9 @@ document.write(produk.map((p,i)=>`
 <div class="product-info">
 <h3>${p[0]}</h3>
 <p class="price">Rp${p[1]}</p>
-
 <select id="warna${i}">
 ${warna.map(w=>`<option value="${w}">${w}</option>`).join("")}
 </select>
-
 <button onclick="tambahKeranjang('${p[0]}',${p[1]},document.getElementById('warna${i}').value)">
 Beli Sekarang
 </button>
@@ -227,15 +221,14 @@ Beli Sekarang
 
 <section id="keranjang">
 <h2>Keranjang Belanja</h2>
-
 <div class="cart-box" id="cart"></div>
 <h3>Total: Rp <span id="total">0</span></h3>
 
 <h3>Metode Pembayaran</h3>
 <select id="pembayaran">
-<option value="Transfer Bank">Transfer Bank</option>
-<option value="E-Wallet">E-Wallet</option>
-<option value="COD">COD</option>
+<option>Transfer Bank</option>
+<option>E-Wallet</option>
+<option>COD</option>
 </select>
 
 <br><br>
@@ -247,7 +240,6 @@ Beli Sekarang
 </div>
 </section>
 
-<!-- ULASAN CUSTOMER -->
 <section id="ulasan">
 <h2>Ulasan Customer</h2>
 
@@ -271,7 +263,13 @@ Beli Sekarang
 
 <script>
 let keranjang=[];
-let ulasan=[];
+
+/* ULASAN DEFAULT (SUDAH MEMBERI ULASAN) */
+let ulasan=[
+{nama:"Aisyah",rating:5,komentar:"Hijabnya lembut dan nyaman dipakai, warna sesuai foto 💕"},
+{nama:"Nabila",rating:4,komentar:"Pengiriman cepat, kualitas bagus"},
+{nama:"Rina",rating:5,komentar:"Sudah beli berkali-kali, selalu puas ✨"}
+];
 
 function tambahKeranjang(nama,harga,warna){
 let item=keranjang.find(i=>i.nama===nama && i.warna===warna);
@@ -325,24 +323,20 @@ renderCart();
 }
 
 function kirimUlasan(){
-let nama=document.getElementById("namaUlasan").value;
-let rating=document.getElementById("rating").value;
-let komentar=document.getElementById("komentar").value;
-if(!nama || !komentar){
-alert("Lengkapi ulasan!");
-return;
-}
-ulasan.push({nama,rating,komentar});
+let nama=namaUlasan.value;
+let rating=rating.value;
+let komentar=komentar.value;
+if(!nama || !komentar){alert("Lengkapi ulasan!");return;}
+ulasan.unshift({nama,rating,komentar});
 tampilUlasan();
-document.getElementById("namaUlasan").value="";
-document.getElementById("komentar").value="";
+namaUlasan.value="";
+komentar.value="";
 }
 
 function tampilUlasan(){
-let list=document.getElementById("listUlasan");
-list.innerHTML="";
+listUlasan.innerHTML="";
 ulasan.forEach(u=>{
-list.innerHTML+=`
+listUlasan.innerHTML+=`
 <div class="review-item">
 <strong>${u.nama}</strong><br>
 <span class="star">${"⭐".repeat(u.rating)}</span>
@@ -350,8 +344,9 @@ list.innerHTML+=`
 </div>`;
 });
 }
+
+tampilUlasan();
 </script>
 
 </body>
 </html>
-
