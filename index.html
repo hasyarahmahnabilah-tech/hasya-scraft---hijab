@@ -264,7 +264,7 @@ Beli Sekarang
 <script>
 let keranjang=[];
 
-/* ULASAN DEFAULT (SUDAH MEMBERI ULASAN) */
+/* ULASAN DEFAULT (TAMPIL OTOMATIS) */
 let ulasan=[
 {nama:"Aisyah",rating:5,komentar:"Hijabnya lembut dan nyaman dipakai, warna sesuai foto 💕"},
 {nama:"Nabila",rating:4,komentar:"Pengiriman cepat, kualitas bagus"},
@@ -326,7 +326,10 @@ function kirimUlasan(){
 let nama=namaUlasan.value;
 let rating=rating.value;
 let komentar=komentar.value;
-if(!nama || !komentar){alert("Lengkapi ulasan!");return;}
+if(!nama || !komentar){
+alert("Lengkapi ulasan!");
+return;
+}
 ulasan.unshift({nama,rating,komentar});
 tampilUlasan();
 namaUlasan.value="";
@@ -345,7 +348,10 @@ listUlasan.innerHTML+=`
 });
 }
 
+/* TAMPIL OTOMATIS SAAT HALAMAN DIBUKA */
+window.onload = function(){
 tampilUlasan();
+};
 </script>
 
 </body>
