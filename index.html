@@ -106,6 +106,7 @@ select, input, textarea{
 padding:6px;
 margin-bottom:8px;
 width:100%;
+font-family:inherit;
 }
 
 .cart-box{
@@ -134,6 +135,21 @@ margin-top:20px;
 display:none;
 }
 
+.review-box{
+background:var(--light);
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+margin-top:30px;
+}
+
+.review-item{
+border-bottom:1px solid #ddd;
+padding:10px 0;
+}
+
+.star{color:gold;}
+
 footer{
 background:var(--pink);
 color:white;
@@ -152,6 +168,7 @@ padding:15px;
 <li><a href="#home">Home</a></li>
 <li><a href="#produk">Produk</a></li>
 <li><a href="#keranjang">Keranjang</a></li>
+<li><a href="#ulasan">Ulasan</a></li>
 </ul>
 </nav>
 </header>
@@ -165,23 +182,7 @@ padding:15px;
 
 <section id="produk">
 <h2>Koleksi Produk</h2>
-<div class="product-grid" id="produkList"></div>
-</section>
-
-<section id="keranjang">
-<h2>Keranjang Belanja</h2>
-<div class="cart-box" id="cart"></div>
-<h3>Total: Rp <span id="total">0</span></h3>
-
-<button onclick="checkout()">Checkout</button>
-
-<div class="success-box" id="successBox">
-<strong>✅ Pemesanan Berhasil!</strong>
-<p>Pesanan telah dikirim ke WhatsApp</p>
-</div>
-</section>
-
-<footer>© 2025 Hasya' Scraft & Hijab</footer>
+<div class="product-grid">
 
 <script>
 const produk=[
@@ -195,28 +196,62 @@ const produk=[
 ["Hijab Paris Jadul",15000,"hijab paris jadul.jpg"]
 ];
 
-const warna=["Hitam","Putih","Cream","Ivory","Latte","Almond","Coksu","Khaki","Dusty Pink","Abu","Sage"];
+const warna=["Hitam","Putih","Cream","Ivory","Latte","Almond","Frapucino","Coksu","Khaki","Biru Tua","Milo","Dusty Pink","Burgundy","Abu","Dark Grey","Sage"];
 
-let keranjang=[];
-
-const produkList=document.getElementById("produkList");
-
-produk.forEach((p,i)=>{
-produkList.innerHTML+=`
+document.write(produk.map((p,i)=>`
 <div class="product-card">
 <img src="${p[2]}">
 <div class="product-info">
 <h3>${p[0]}</h3>
 <p class="price">Rp${p[1]}</p>
 <select id="warna${i}">
-${warna.map(w=>`<option value="${w}">${w}</option>`).join("")}
+${warna.map(w=>`<option>${w}</option>`).join("")}
 </select>
 <button onclick="tambahKeranjang('${p[0]}',${p[1]},document.getElementById('warna${i}').value)">
 Beli Sekarang
 </button>
 </div>
-</div>`;
-});
+</div>
+`).join(""));
+</script>
+
+</div>
+</section>
+
+<section id="keranjang">
+<h2>Keranjang Belanja</h2>
+<div class="cart-box" id="cart"></div>
+<h3>Total: Rp <span id="total">0</span></h3>
+<button onclick="checkout()">Checkout</button>
+
+<div class="success-box" id="successBox">
+<strong>✅ Pemesanan Berhasil!</strong>
+</div>
+</section>
+
+<section id="ulasan">
+<h2>Ulasan Customer</h2>
+
+<div class="review-box">
+<input type="text" id="namaUlasan" placeholder="Nama Anda">
+<select id="rating">
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+</select>
+<textarea id="komentar" placeholder="Tulis ulasan Anda..."></textarea>
+<button onclick="kirimUlasan()">Kirim Ulasan</button>
+</div>
+
+<div class="review-box" id="listUlasan"></div>
+</section>
+
+<footer>© 2025 Hasya' Scraft & Hijab</footer>
+
+<script>
+let keranjang=[];
 
 function tambahKeranjang(nama,harga,warna){
 let item=keranjang.find(i=>i.nama===nama && i.warna===warna);
@@ -263,25 +298,42 @@ if(keranjang.length===0){
 alert("Keranjang masih kosong!");
 return;
 }
-
-let pesan="Halo Hasya' Scraft & Hijab%0A%0A";
-let total=0;
-
-keranjang.forEach((item,i)=>{
-let sub=item.harga*item.qty;
-total+=sub;
-pesan+=`${i+1}. ${item.nama} (${item.warna}) x${item.qty} = Rp${sub}%0A`;
-});
-
-pesan+=`%0ATotal: Rp${total}`;
-
-let nomorWA="6281234567890";
-window.open(`https://wa.me/${nomorWA}?text=${pesan}`,"_blank");
-
 document.getElementById("successBox").style.display="block";
 keranjang=[];
 renderCart();
 }
+
+/* ULASAN */
+let ulasan=[
+{nama:"Aisyah",rating:5,komentar:"Hijabnya lembut dan nyaman 💕"},
+{nama:"Nabila",rating:4,komentar:"Pengiriman cepat"},
+{nama:"Rina",rating:5,komentar:"Selalu puas ✨"}
+];
+
+function kirimUlasan(){
+let nama=namaUlasan.value;
+let rating=rating.value;
+let komentar=komentar.value;
+if(!nama||!komentar){alert("Lengkapi ulasan");return;}
+ulasan.unshift({nama,rating,komentar});
+tampilUlasan();
+namaUlasan.value="";
+komentar.value="";
+}
+
+function tampilUlasan(){
+listUlasan.innerHTML="";
+ulasan.forEach(u=>{
+listUlasan.innerHTML+=`
+<div class="review-item">
+<strong>${u.nama}</strong><br>
+<span class="star">${"⭐".repeat(u.rating)}</span>
+<p>${u.komentar}</p>
+</div>`;
+});
+}
+
+window.onload=()=>tampilUlasan();
 </script>
 
 </body>
