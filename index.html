@@ -196,7 +196,7 @@ const produk=[
 ["Hijab Paris Jadul",15000,"hijab paris jadul.jpg"]
 ];
 
-const warna=["Hitam","Putih","Cream","Ivory","Latte","Almond","Frapucino","Coksu","Khaki","Biru Tua","Milo","Dusty Pink","Burgundy","Abu","Dark Grey","Sage"];
+const warna=["Hitam","Putih","Cream","Ivory","Latte","Almond","Coksu","Khaki","Dusty Pink","Abu","Sage"];
 
 document.write(produk.map((p,i)=>`
 <div class="product-card">
@@ -220,12 +220,23 @@ Beli Sekarang
 
 <section id="keranjang">
 <h2>Keranjang Belanja</h2>
+
 <div class="cart-box" id="cart"></div>
 <h3>Total: Rp <span id="total">0</span></h3>
+
+<label><strong>Metode Pembayaran</strong></label>
+<select id="metodeBayar">
+<option value="">-- Pilih Metode Pembayaran --</option>
+<option>Transfer Bank</option>
+<option>E-Wallet (OVO/DANA/GoPay)</option>
+<option>COD (Bayar di Tempat)</option>
+</select>
+
 <button onclick="checkout()">Checkout</button>
 
 <div class="success-box" id="successBox">
 <strong>✅ Pemesanan Berhasil!</strong>
+<p>Pesanan Anda sedang diproses.</p>
 </div>
 </section>
 
@@ -298,9 +309,17 @@ if(keranjang.length===0){
 alert("Keranjang masih kosong!");
 return;
 }
+
+let metode=document.getElementById("metodeBayar").value;
+if(!metode){
+alert("Silakan pilih metode pembayaran!");
+return;
+}
+
 document.getElementById("successBox").style.display="block";
 keranjang=[];
 renderCart();
+document.getElementById("metodeBayar").value="";
 }
 
 /* ULASAN */
