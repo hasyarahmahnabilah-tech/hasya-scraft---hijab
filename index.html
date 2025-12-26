@@ -227,6 +227,7 @@ Beli Sekarang
 
 <div class="success-box" id="successBox">
 <strong>✅ Pemesanan Berhasil!</strong>
+<p>Pesanan telah dikirim ke WhatsApp</p>
 </div>
 </section>
 
@@ -260,19 +261,82 @@ let ulasan=[
 {nama:"Rina",rating:5,komentar:"Sudah beli berkali-kali, selalu puas ✨"}
 ];
 
-function kirimUlasan(){
-let nama=document.getElementById("namaUlasan").value;
-let rating=document.getElementById("rating").value;
-let komentar=document.getElementById("komentar").value;
+function tambahKeranjang(nama,harga,warna){
+let item=keranjang.find(i=>i.nama===nama && i.warna===warna);
+if(item){item.qty++;}
+else{keranjang.push({nama,harga,warna,qty:1});}
+renderCart();
+}
 
-if(!nama || !komentar){
-alert("Lengkapi ulasan!");
+function renderCart(){
+let cart=document.getElementById("cart");
+let total=0;
+cart.innerHTML="";
+keranjang.forEach((item,i)=>{
+let subtotal=item.harga*item.qty;
+total+=subtotal;
+cart.innerHTML+=`
+<div class="cart-item">
+<span>${item.nama}<br><small>${item.warna}</small></span>
+<div class="qty">
+<button onclick="ubahQty(${i},-1)">-</button>
+${item.qty}
+<button onclick="ubahQty(${i},1)">+</button>
+</div>
+<span>Rp ${subtotal}</span>
+<button onclick="hapusItem(${i})">Hapus</button>
+</div>`;
+});
+document.getElementById("total").innerText=total;
+}
+
+function ubahQty(i,n){
+keranjang[i].qty+=n;
+if(keranjang[i].qty<=0) keranjang.splice(i,1);
+renderCart();
+}
+
+function hapusItem(i){
+keranjang.splice(i,1);
+renderCart();
+}
+
+/* CHECKOUT KE WHATSAPP */
+function checkout(){
+if(keranjang.length===0){
+alert("Keranjang masih kosong!");
 return;
 }
+
+let pesan="Halo Hasya' Scraft & Hijab 👋%0A%0A";
+pesan+="Saya ingin memesan:%0A%0A";
+let total=0;
+
+keranjang.forEach((item,i)=>{
+let subtotal=item.harga*item.qty;
+total+=subtotal;
+pesan+=`${i+1}. ${item.nama} (${item.warna}) x${item.qty} = Rp${subtotal}%0A`;
+});
+
+pesan+=`%0ATotal: Rp${total}%0ATerima kasih 🙏`;
+
+let nomorWA="6281234567890";
+window.open(`https://wa.me/${nomorWA}?text=${pesan}`,"_blank");
+
+document.getElementById("successBox").style.display="block";
+keranjang=[];
+renderCart();
+}
+
+function kirimUlasan(){
+let nama=namaUlasan.value;
+let rating=rating.value;
+let komentar=komentar.value;
+if(!nama || !komentar){alert("Lengkapi ulasan!");return;}
 ulasan.unshift({nama,rating,komentar});
 tampilUlasan();
-document.getElementById("namaUlasan").value="";
-document.getElementById("komentar").value="";
+namaUlasan.value="";
+komentar.value="";
 }
 
 function tampilUlasan(){
