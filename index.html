@@ -109,6 +109,32 @@ width:100%;
 font-family:inherit;
 }
 
+.cart-box{
+background:var(--light);
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.cart-item{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+gap:10px;
+margin-bottom:10px;
+align-items:center;
+}
+
+.qty button{padding:3px 8px;}
+
+.success-box{
+background:#e8fff1;
+border:1px solid #2ecc71;
+padding:15px;
+border-radius:10px;
+margin-top:20px;
+display:none;
+}
+
 .review-box{
 background:var(--light);
 padding:20px;
@@ -141,6 +167,7 @@ padding:15px;
 <ul>
 <li><a href="#home">Home</a></li>
 <li><a href="#produk">Produk</a></li>
+<li><a href="#keranjang">Keranjang</a></li>
 <li><a href="#ulasan">Ulasan</a></li>
 </ul>
 </nav>
@@ -150,6 +177,56 @@ padding:15px;
 <div class="hero-content">
 <h2>Tampil Anggun Setiap Hari</h2>
 <p>Hijab elegan, lembut, dan nyaman</p>
+</div>
+</section>
+
+<section id="produk">
+<h2>Koleksi Produk</h2>
+<div class="product-grid">
+
+<script>
+const produk=[
+["Pashmina Kaos Rayon",45000,"pashmina kaos.jpg"],
+["Pashmina Ceruty",45000,"pashmina ceruty.jpg"],
+["Hijab Square Scarf",40000,"hijab motif.jpg"],
+["Hijab Bella Square",30000,"hijab bella square.jpg"],
+["Hijab Bergo Sport",15000,"hijab bergo.jpg"],
+["Pashmina Crinkle",35000,"pashmina crinkle.jpg"],
+["Pashmina Ombre 2 Warna",45000,"pashmina ombre 2 warna.jpg"],
+["Hijab Paris Jadul",15000,"hijab paris jadul.jpg"]
+];
+
+const warna=["Hitam","Putih","Cream","Ivory","Latte","Almond","Frapucino","Coksu","Khaki","Biru Tua","Milo","Dusty Pink","Burgundy","Abu","Dark Grey","Sage"];
+
+document.write(produk.map((p,i)=>`
+<div class="product-card">
+<img src="${p[2]}">
+<div class="product-info">
+<h3>${p[0]}</h3>
+<p class="price">Rp${p[1]}</p>
+<select id="warna${i}">
+${warna.map(w=>`<option value="${w}">${w}</option>`).join("")}
+</select>
+<button onclick="tambahKeranjang('${p[0]}',${p[1]},document.getElementById('warna${i}').value)">
+Beli Sekarang
+</button>
+</div>
+</div>
+`).join(""));
+</script>
+
+</div>
+</section>
+
+<section id="keranjang">
+<h2>Keranjang Belanja</h2>
+<div class="cart-box" id="cart"></div>
+<h3>Total: Rp <span id="total">0</span></h3>
+
+<button onclick="checkout()">Checkout</button>
+
+<div class="success-box" id="successBox">
+<strong>✅ Pemesanan Berhasil!</strong>
 </div>
 </section>
 
@@ -175,6 +252,8 @@ padding:15px;
 <footer>© 2025 Hasya' Scraft & Hijab</footer>
 
 <script>
+let keranjang=[];
+
 let ulasan=[
 {nama:"Aisyah",rating:5,komentar:"Hijabnya lembut dan nyaman dipakai, warna sesuai foto 💕"},
 {nama:"Nabila",rating:4,komentar:"Pengiriman cepat, kualitas bagus"},
@@ -190,19 +269,16 @@ if(!nama || !komentar){
 alert("Lengkapi ulasan!");
 return;
 }
-
 ulasan.unshift({nama,rating,komentar});
 tampilUlasan();
-
 document.getElementById("namaUlasan").value="";
 document.getElementById("komentar").value="";
 }
 
 function tampilUlasan(){
-let list=document.getElementById("listUlasan");
-list.innerHTML="";
+listUlasan.innerHTML="";
 ulasan.forEach(u=>{
-list.innerHTML+=`
+listUlasan.innerHTML+=`
 <div class="review-item">
 <strong>${u.nama}</strong><br>
 <span class="star">${"⭐".repeat(u.rating)}</span>
