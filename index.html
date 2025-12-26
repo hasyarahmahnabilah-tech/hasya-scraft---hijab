@@ -104,7 +104,7 @@ cursor:pointer;
 
 select, input, textarea{
 padding:6px;
-margin-bottom:8px;
+margin-bottom:10px;
 width:100%;
 font-family:inherit;
 }
@@ -224,19 +224,21 @@ Beli Sekarang
 <div class="cart-box" id="cart"></div>
 <h3>Total: Rp <span id="total">0</span></h3>
 
+<div class="cart-box">
 <label><strong>Metode Pembayaran</strong></label>
 <select id="metodeBayar">
 <option value="">-- Pilih Metode Pembayaran --</option>
 <option>Transfer Bank</option>
-<option>E-Wallet (OVO/DANA/GoPay)</option>
+<option>E-Wallet (OVO / DANA / GoPay)</option>
 <option>COD (Bayar di Tempat)</option>
 </select>
 
 <button onclick="checkout()">Checkout</button>
+</div>
 
 <div class="success-box" id="successBox">
 <strong>✅ Pemesanan Berhasil!</strong>
-<p>Pesanan Anda sedang diproses.</p>
+<p id="infoBayar"></p>
 </div>
 </section>
 
@@ -315,6 +317,9 @@ if(!metode){
 alert("Silakan pilih metode pembayaran!");
 return;
 }
+
+document.getElementById("infoBayar").innerText =
+"Metode Pembayaran: " + metode;
 
 document.getElementById("successBox").style.display="block";
 keranjang=[];
