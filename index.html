@@ -327,7 +327,7 @@ renderCart();
 document.getElementById("metodeBayar").value="";
 }
 
-/* ULASAN */
+/* ===== ULASAN (SUDAH FIX) ===== */
 let ulasan=[
 {nama:"Aisyah",rating:5,komentar:"Hijabnya lembut dan nyaman 💕"},
 {nama:"Nabila",rating:4,komentar:"Pengiriman cepat"},
@@ -335,14 +335,25 @@ let ulasan=[
 ];
 
 function kirimUlasan(){
-let nama=namaUlasan.value;
-let rating=rating.value;
-let komentar=komentar.value;
-if(!nama||!komentar){alert("Lengkapi ulasan");return;}
-ulasan.unshift({nama,rating,komentar});
+let nama = document.getElementById("namaUlasan").value;
+let ratingValue = document.getElementById("rating").value;
+let komentarValue = document.getElementById("komentar").value;
+
+if(!nama || !komentarValue){
+alert("Lengkapi ulasan!");
+return;
+}
+
+ulasan.unshift({
+nama:nama,
+rating:ratingValue,
+komentar:komentarValue
+});
+
 tampilUlasan();
-namaUlasan.value="";
-komentar.value="";
+
+document.getElementById("namaUlasan").value="";
+document.getElementById("komentar").value="";
 }
 
 function tampilUlasan(){
