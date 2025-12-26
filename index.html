@@ -102,10 +102,11 @@ border-radius:20px;
 cursor:pointer;
 }
 
-select{
+select, input, textarea{
 padding:6px;
 margin-bottom:8px;
 width:100%;
+font-family:inherit;
 }
 
 .cart-box{
@@ -136,6 +137,24 @@ margin-top:20px;
 display:none;
 }
 
+/* ULASAN */
+.review-box{
+background:var(--light);
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+margin-top:30px;
+}
+
+.review-item{
+border-bottom:1px solid #ddd;
+padding:10px 0;
+}
+
+.star{
+color:gold;
+}
+
 footer{
 background:var(--pink);
 color:white;
@@ -154,6 +173,7 @@ padding:15px;
 <li><a href="#home">Home</a></li>
 <li><a href="#produk">Produk</a></li>
 <li><a href="#keranjang">Keranjang</a></li>
+<li><a href="#ulasan">Ulasan</a></li>
 </ul>
 </nav>
 </header>
@@ -227,10 +247,31 @@ Beli Sekarang
 </div>
 </section>
 
+<!-- ULASAN CUSTOMER -->
+<section id="ulasan">
+<h2>Ulasan Customer</h2>
+
+<div class="review-box">
+<input type="text" id="namaUlasan" placeholder="Nama Anda">
+<select id="rating">
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+</select>
+<textarea id="komentar" placeholder="Tulis ulasan Anda..."></textarea>
+<button onclick="kirimUlasan()">Kirim Ulasan</button>
+</div>
+
+<div class="review-box" id="listUlasan"></div>
+</section>
+
 <footer>© 2025 Hasya' Scraft & Hijab</footer>
 
 <script>
 let keranjang=[];
+let ulasan=[];
 
 function tambahKeranjang(nama,harga,warna){
 let item=keranjang.find(i=>i.nama===nama && i.warna===warna);
@@ -243,7 +284,6 @@ function renderCart(){
 let cart=document.getElementById("cart");
 let total=0;
 cart.innerHTML="";
-
 keranjang.forEach((item,i)=>{
 let subtotal=item.harga*item.qty;
 total+=subtotal;
@@ -259,7 +299,6 @@ ${item.qty}
 <button onclick="hapusItem(${i})">Hapus</button>
 </div>`;
 });
-
 document.getElementById("total").innerText=total;
 }
 
@@ -279,12 +318,37 @@ if(keranjang.length===0){
 alert("Keranjang masih kosong!");
 return;
 }
-
 document.getElementById("successBox").style.display="block";
 alert("Pemesanan berhasil!");
-
 keranjang=[];
 renderCart();
+}
+
+function kirimUlasan(){
+let nama=document.getElementById("namaUlasan").value;
+let rating=document.getElementById("rating").value;
+let komentar=document.getElementById("komentar").value;
+if(!nama || !komentar){
+alert("Lengkapi ulasan!");
+return;
+}
+ulasan.push({nama,rating,komentar});
+tampilUlasan();
+document.getElementById("namaUlasan").value="";
+document.getElementById("komentar").value="";
+}
+
+function tampilUlasan(){
+let list=document.getElementById("listUlasan");
+list.innerHTML="";
+ulasan.forEach(u=>{
+list.innerHTML+=`
+<div class="review-item">
+<strong>${u.nama}</strong><br>
+<span class="star">${"⭐".repeat(u.rating)}</span>
+<p>${u.komentar}</p>
+</div>`;
+});
 }
 </script>
 
