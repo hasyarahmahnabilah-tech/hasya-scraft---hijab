@@ -19,7 +19,6 @@ margin:0;
 font-family:'Poppins',sans-serif;
 background:#fff;
 color:#333;
-scroll-behavior:smooth;
 }
 
 header{
@@ -86,7 +85,7 @@ text-align:center;
 
 .product-card img{
 width:100%;
-height:280px;
+height:260px;
 object-fit:cover;
 }
 
@@ -98,14 +97,12 @@ button{
 background:var(--dark-pink);
 color:white;
 border:none;
-padding:8px 18px;
+padding:8px 15px;
 border-radius:20px;
 cursor:pointer;
 }
 
 .cart-box{
-max-width:600px;
-margin:auto;
 background:var(--light);
 padding:20px;
 border-radius:12px;
@@ -113,9 +110,21 @@ box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
 .cart-item{
-display:flex;
-justify-content:space-between;
-margin-bottom:8px;
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+align-items:center;
+gap:10px;
+margin-bottom:10px;
+}
+
+.qty button{
+padding:3px 8px;
+}
+
+select{
+padding:8px;
+width:100%;
+margin-top:10px;
 }
 
 footer{
@@ -136,7 +145,6 @@ padding:15px;
 <li><a href="#home">Home</a></li>
 <li><a href="#produk">Produk</a></li>
 <li><a href="#keranjang">Keranjang</a></li>
-<li><a href="#contact">Kontak</a></li>
 </ul>
 </nav>
 </header>
@@ -148,139 +156,118 @@ padding:15px;
 </div>
 </section>
 
-<!-- PRODUK (SEMUA TIDAK ADA YANG HILANG) -->
+<!-- PRODUK -->
 <section id="produk">
 <h2>Koleksi Produk</h2>
-
 <div class="product-grid">
 
-<div class="product-card">
-<img src="pashmina kaos.jpg">
-<div class="product-info">
-<h3>Pashmina Kaos Rayon</h3>
-<p class="price">Rp45.000</p>
-<button onclick="tambahKeranjang('Pashmina Kaos Rayon',45000)">Beli Sekarang</button>
-</div>
-</div>
+<!-- 8 PRODUK (TIDAK ADA YANG DIHAPUS) -->
+<script>
+const produk=[
+["Pashmina Kaos Rayon",45000,"pashmina kaos.jpg"],
+["Pashmina Ceruty",45000,"pashmina ceruty.jpg"],
+["Hijab Square Scarf",40000,"hijab motif.jpg"],
+["Hijab Bella Square",30000,"hijab bella square.jpg"],
+["Hijab Bergo Sport",15000,"hijab bergo.jpg"],
+["Pashmina Crinkle",35000,"pashmina crinkle.jpg"],
+["Pashmina Ombre 2 Warna",45000,"pashmina ombre 2 warna.jpg"],
+["Hijab Paris Jadul",15000,"hijab paris jadul.jpg"]
+];
 
+document.write(produk.map(p=>`
 <div class="product-card">
-<img src="pashmina ceruty.jpg">
+<img src="${p[2]}">
 <div class="product-info">
-<h3>Pashmina Ceruty</h3>
-<p class="price">Rp45.000</p>
-<button onclick="tambahKeranjang('Pashmina Ceruty',45000)">Beli Sekarang</button>
+<h3>${p[0]}</h3>
+<p class="price">Rp${p[1]}</p>
+<button onclick="tambahKeranjang('${p[0]}',${p[1]})">Beli Sekarang</button>
 </div>
-</div>
-
-<div class="product-card">
-<img src="hijab motif.jpg">
-<div class="product-info">
-<h3>Hijab Square Scarf</h3>
-<p class="price">Rp40.000</p>
-<button onclick="tambahKeranjang('Hijab Square Scarf',40000)">Beli Sekarang</button>
-</div>
-</div>
-
-<div class="product-card">
-<img src="hijab bella square.jpg">
-<div class="product-info">
-<h3>Hijab Bella Square</h3>
-<p class="price">Rp30.000</p>
-<button onclick="tambahKeranjang('Hijab Bella Square',30000)">Beli Sekarang</button>
-</div>
-</div>
-
-<div class="product-card">
-<img src="hijab bergo.jpg">
-<div class="product-info">
-<h3>Hijab Bergo Sport</h3>
-<p class="price">Rp15.000</p>
-<button onclick="tambahKeranjang('Hijab Bergo Sport',15000)">Beli Sekarang</button>
-</div>
-</div>
-
-<div class="product-card">
-<img src="pashmina crinkle.jpg">
-<div class="product-info">
-<h3>Pashmina Crinkle</h3>
-<p class="price">Rp35.000</p>
-<button onclick="tambahKeranjang('Pashmina Crinkle',35000)">Beli Sekarang</button>
-</div>
-</div>
-
-<div class="product-card">
-<img src="pashmina ombre 2 warna.jpg">
-<div class="product-info">
-<h3>Pashmina Ombre 2 Warna</h3>
-<p class="price">Rp45.000</p>
-<button onclick="tambahKeranjang('Pashmina Ombre 2 Warna',45000)">Beli Sekarang</button>
-</div>
-</div>
-
-<div class="product-card">
-<img src="hijab paris jadul.jpg">
-<div class="product-info">
-<h3>Hijab Paris Jadul</h3>
-<p class="price">Rp15.000</p>
-<button onclick="tambahKeranjang('Hijab Paris Jadul',15000)">Beli Sekarang</button>
-</div>
-</div>
+</div>`).join(""));
+</script>
 
 </div>
 </section>
 
-<!-- KERANJANG -->
+<!-- KERANJANG SHOPEE STYLE -->
 <section id="keranjang">
 <h2>Keranjang Belanja</h2>
 
 <div class="cart-box" id="cart"></div>
-<h3 style="text-align:center;">Total: Rp <span id="total">0</span></h3>
 
-<div style="text-align:center;">
-<button onclick="checkout()">Checkout WhatsApp</button>
-</div>
+<h3>Total: Rp <span id="total">0</span></h3>
+
+<h3>Metode Pembayaran</h3>
+<select id="pembayaran">
+<option value="Transfer Bank">Transfer Bank</option>
+<option value="E-Wallet (Dana/OVO/Gopay)">E-Wallet</option>
+<option value="COD">COD (Bayar di Tempat)</option>
+</select>
+
+<br><br>
+<button onclick="checkout()">Checkout</button>
 </section>
 
-<!-- KONTAK -->
-<section id="contact">
-<h2>Kontak</h2>
-<p style="text-align:center;">📞 +62 813-1603-8114</p>
-<p style="text-align:center;">Instagram | TikTok | Shopee</p>
-</section>
-
-<footer>
-© 2025 Hasya' Scraft & Hijab
-</footer>
+<footer>© 2025 Hasya' Scraft & Hijab</footer>
 
 <script>
 let keranjang=[];
-let total=0;
 
 function tambahKeranjang(nama,harga){
-keranjang.push({nama,harga});
-total+=harga;
-tampilKeranjang();
+let item=keranjang.find(i=>i.nama===nama);
+if(item){
+item.qty++;
+}else{
+keranjang.push({nama,harga,qty:1});
+}
+renderCart();
 }
 
-function tampilKeranjang(){
+function renderCart(){
 let cart=document.getElementById("cart");
+let total=0;
 cart.innerHTML="";
-keranjang.forEach(item=>{
+
+keranjang.forEach((item,i)=>{
+let subtotal=item.harga*item.qty;
+total+=subtotal;
 cart.innerHTML+=`
 <div class="cart-item">
 <span>${item.nama}</span>
-<span>Rp ${item.harga}</span>
+<div class="qty">
+<button onclick="ubahQty(${i},-1)">-</button>
+${item.qty}
+<button onclick="ubahQty(${i},1)">+</button>
+</div>
+<span>Rp ${subtotal}</span>
+<button onclick="hapusItem(${i})">Hapus</button>
 </div>`;
 });
+
 document.getElementById("total").innerText=total;
 }
 
+function ubahQty(i,n){
+keranjang[i].qty+=n;
+if(keranjang[i].qty<=0) keranjang.splice(i,1);
+renderCart();
+}
+
+function hapusItem(i){
+keranjang.splice(i,1);
+renderCart();
+}
+
 function checkout(){
+let metode=document.getElementById("pembayaran").value;
 let pesan="Halo admin, saya ingin memesan:%0A";
-keranjang.forEach(item=>{
-pesan+=`- ${item.nama} (Rp ${item.harga})%0A`;
+let total=0;
+
+keranjang.forEach(i=>{
+pesan+=`- ${i.nama} x${i.qty} (Rp ${i.harga*i.qty})%0A`;
+total+=i.harga*i.qty;
 });
-pesan+=`%0ATotal: Rp ${total}`;
+
+pesan+=`%0ATotal: Rp ${total}%0AMetode: ${metode}`;
 window.open(`https://wa.me/6281316038114?text=${pesan}`,'_blank');
 }
 </script>
