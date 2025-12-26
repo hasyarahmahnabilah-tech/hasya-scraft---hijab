@@ -135,7 +135,6 @@ margin-top:20px;
 display:none;
 }
 
-/* ULASAN */
 .review-box{
 background:var(--light);
 padding:20px;
@@ -224,19 +223,10 @@ Beli Sekarang
 <div class="cart-box" id="cart"></div>
 <h3>Total: Rp <span id="total">0</span></h3>
 
-<h3>Metode Pembayaran</h3>
-<select id="pembayaran">
-<option>Transfer Bank</option>
-<option>E-Wallet</option>
-<option>COD</option>
-</select>
-
-<br><br>
 <button onclick="checkout()">Checkout</button>
 
 <div class="success-box" id="successBox">
 <strong>✅ Pemesanan Berhasil!</strong>
-<p>Terima kasih telah memesan di Hasya' Scraft & Hijab.</p>
 </div>
 </section>
 
@@ -264,76 +254,25 @@ Beli Sekarang
 <script>
 let keranjang=[];
 
-/* ULASAN DEFAULT (TAMPIL OTOMATIS) */
 let ulasan=[
 {nama:"Aisyah",rating:5,komentar:"Hijabnya lembut dan nyaman dipakai, warna sesuai foto 💕"},
 {nama:"Nabila",rating:4,komentar:"Pengiriman cepat, kualitas bagus"},
 {nama:"Rina",rating:5,komentar:"Sudah beli berkali-kali, selalu puas ✨"}
 ];
 
-function tambahKeranjang(nama,harga,warna){
-let item=keranjang.find(i=>i.nama===nama && i.warna===warna);
-if(item){item.qty++;}
-else{keranjang.push({nama,harga,warna,qty:1});}
-renderCart();
-}
-
-function renderCart(){
-let cart=document.getElementById("cart");
-let total=0;
-cart.innerHTML="";
-keranjang.forEach((item,i)=>{
-let subtotal=item.harga*item.qty;
-total+=subtotal;
-cart.innerHTML+=`
-<div class="cart-item">
-<span>${item.nama}<br><small>Warna: ${item.warna}</small></span>
-<div class="qty">
-<button onclick="ubahQty(${i},-1)">-</button>
-${item.qty}
-<button onclick="ubahQty(${i},1)">+</button>
-</div>
-<span>Rp ${subtotal}</span>
-<button onclick="hapusItem(${i})">Hapus</button>
-</div>`;
-});
-document.getElementById("total").innerText=total;
-}
-
-function ubahQty(i,n){
-keranjang[i].qty+=n;
-if(keranjang[i].qty<=0) keranjang.splice(i,1);
-renderCart();
-}
-
-function hapusItem(i){
-keranjang.splice(i,1);
-renderCart();
-}
-
-function checkout(){
-if(keranjang.length===0){
-alert("Keranjang masih kosong!");
-return;
-}
-document.getElementById("successBox").style.display="block";
-alert("Pemesanan berhasil!");
-keranjang=[];
-renderCart();
-}
-
 function kirimUlasan(){
-let nama=namaUlasan.value;
-let rating=rating.value;
-let komentar=komentar.value;
+let nama=document.getElementById("namaUlasan").value;
+let rating=document.getElementById("rating").value;
+let komentar=document.getElementById("komentar").value;
+
 if(!nama || !komentar){
 alert("Lengkapi ulasan!");
 return;
 }
 ulasan.unshift({nama,rating,komentar});
 tampilUlasan();
-namaUlasan.value="";
-komentar.value="";
+document.getElementById("namaUlasan").value="";
+document.getElementById("komentar").value="";
 }
 
 function tampilUlasan(){
@@ -348,8 +287,7 @@ listUlasan.innerHTML+=`
 });
 }
 
-/* TAMPIL OTOMATIS SAAT HALAMAN DIBUKA */
-window.onload = function(){
+window.onload=function(){
 tampilUlasan();
 };
 </script>
